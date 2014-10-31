@@ -1,0 +1,108 @@
+body {
+	color: gray;
+	background-image: url("bg.png");
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+}
+
+body > div, aside {
+	background-color: #f8f8f8;
+	border: 1px #444 solid;
+	margin: 50px auto;
+}
+
+body > div {
+	position: relative;
+	width: 600px;
+	height: 40px;
+	padding: 40px 80px 40px 76px;
+	z-index: 2;
+}
+
+section {
+	position: relative;
+	font-size: 14px;
+	width: 250px;
+	float: left;
+}
+
+section:last-child {
+	text-align: right;
+	float: right;
+}
+
+input[type="text"] {
+	width: 100%;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+img[src^="arrow"] {
+	position: absolute;
+	top: 38px;
+	left: 350px;
+	height: 60px;
+	-webkit-transition: -webkit-transform 400ms ease-in-out;
+}
+
+img[src^="loading"] {
+	position: absolute;
+	top: 52px;
+	left: 365px;
+	visibility: hidden;
+}
+
+aside {
+	width: 600px;
+	padding: 20px 80px 18px 76px;
+}
+
+aside table { width: 100%; }
+
+aside table td { width: 25%; }
+
+aside div {
+	width: 1em;
+	height: 1em;
+	float: left;
+	margin-right: 8px;
+	border: 1px black solid;
+	text-align: center;
+}
+
+aside tr td:nth-child(1) div { background-color: #fff; }
+aside tr td:nth-child(2) div { background-color: #FFEDC7; }
+aside tr td:nth-child(3) div { background-color: #FF7777; }
+aside tr td:nth-child(4) div { color: #FF8A5C; }
+
+ul {
+	visibility: hidden;
+	position: absolute;
+	width: 244px;
+	margin: 0px;
+	padding: 4px 7px;
+	border: 1px #bbb solid;
+	background: white;
+	text-align: left;
+	font-size: 15px;
+	list-style-type: none;
+}
+
+ul a {
+	color: gray;
+	text-decoration: none;
+}
+ul a:hover { text-decoration: underline; }
+
+.uncertain {
+	color: #FF8A5C;
+}
+
+img[src^="gotoArrow"] {
+	position: absolute;
+	right: -5px;
+	bottom: 4px;
+	height: 15px;
+	cursor: pointer;
+	visibility: hidden;
+}
