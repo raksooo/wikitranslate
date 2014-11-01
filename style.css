@@ -82,7 +82,7 @@ aside tr td:nth-child(4) div { color: #FF8A5C; }
 ul {
 	visibility: hidden;
 	position: absolute;
-	width: 244px;
+	width: 222px;
 	margin: 0px;
 	padding: 4px 7px;
 	border: 1px #bbb solid;
@@ -90,6 +90,11 @@ ul {
 	text-align: left;
 	font-size: 15px;
 	list-style-type: none;
+}
+
+section:last-of-type ul {
+    left: -28px;
+    top: 51px;
 }
 
 ul a {
