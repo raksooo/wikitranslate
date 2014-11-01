@@ -32,11 +32,11 @@
 		global $page;
 	
 		$disambiguation = false;
-		if ($page["categories"] !== null)
+		if (array_key_exists("categories", $page) && $page["categories"] !== null)
 			foreach ($page["categories"] as $v)
 				if (stristr($v["title"], "disambiguation") || stristr($v["title"], "förgreningssid"))
 					$disambiguation = true;
-		return ($page["langlinks"] !== null) + $disambiguation*2;
+		return (array_key_exists("langlinks", $page) && $page["langlinks"] !== null) + $disambiguation*2;
 	}
 	function /*Array*/ getTranslationsForPages($pages) {
 		global $lang, $opposite;
