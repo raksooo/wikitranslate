@@ -129,7 +129,7 @@ function onFocus(element, onclick) {
 		element.value = "";
 	else if (onclick)
 		element.select();
-	getArrowImg().style.webkitTransform = "rotateZ("+ (getLanguageCode(element) == sv ? "0" : "-180") +"deg)";
+	getArrowImg().style.transform = "rotateZ("+ (getLanguageCode(element) == sv ? "0" : "-180") +"deg)";
 }
 
 function onLoad() {

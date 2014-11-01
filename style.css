@@ -14,7 +14,7 @@ body > div, aside {
 body > div {
 	position: relative;
 	width: 600px;
-	height: 40px;
+	height: 50px;
 	padding: 40px 80px 40px 76px;
 	z-index: 2;
 }
@@ -22,7 +22,7 @@ body > div {
 section {
 	position: relative;
 	font-size: 14px;
-	width: 250px;
+	width: 210px;
 	float: left;
 }
 
@@ -33,28 +33,32 @@ section:last-child {
 
 input[type="text"] {
 	width: 100%;
-	padding-left: 3px;
-	padding-right: 3px;
+    padding: 7px 12px;
+    font-size: 1.1em;
+}
+
+section:last-of-type input[type="text"] {
+    float: right;
 }
 
 img[src^="arrow"] {
 	position: absolute;
-	top: 38px;
+	top: 43px;
 	left: 350px;
 	height: 60px;
-	-webkit-transition: -webkit-transform 400ms ease-in-out;
+	transition: transform 400ms ease-in-out;
 }
 
 img[src^="loading"] {
 	position: absolute;
-	top: 52px;
+	top: 58px;
 	left: 365px;
 	visibility: hidden;
 }
 
 aside {
 	width: 600px;
-	padding: 20px 80px 18px 76px;
+	padding: 30px 80px 28px 76px;
 }
 
 aside table { width: 100%; }
@@ -100,9 +104,13 @@ ul a:hover { text-decoration: underline; }
 
 img[src^="gotoArrow"] {
 	position: absolute;
-	right: -5px;
-	bottom: 4px;
+	right: -15px;
+	bottom: 10px;
 	height: 15px;
 	cursor: pointer;
 	visibility: hidden;
+}
+
+section:last-of-type img[src^="gotoArrow"] {
+    right: 12px;
 }
