@@ -32,11 +32,14 @@
 		global $page;
 	
 		$disambiguation = false;
-		if (array_key_exists("categories", $page) && $page["categories"] !== null)
-			foreach ($page["categories"] as $v)
-				if (stristr($v["title"], "disambiguation") || stristr($v["title"], "förgreningssid"))
+		if (array_key_exists("categories", $page) && $page["categories"] !== null) {
+			foreach ($page["categories"] as $v) {
+				if (stristr($v["title"], "disambiguation") || stristr($v["title"], "förgrenings")) {
 					$disambiguation = true;
-		return (array_key_exists("langlinks", $page) && $page["langlinks"] !== null) + $disambiguation*2;
+                }
+            }
+        }
+		return min((array_key_exists("langlinks", $page) && $page["langlinks"] !== null) + $disambiguation*2, 2);
 	}
 	function /*Array*/ getTranslationsForPages($pages) {
 		global $lang, $opposite;
@@ -45,38 +48,40 @@
 		$result = utf8_url_get_array("http://". $lang .".wikipedia.org/w/api.php?format=json&action=query&titles=". join("|", $pages) ."&prop=langlinks&lllang=". $opposite);
 		$i = 0;
 		foreach ($result["query"]["pages"] as $page) {
-			$results[$i] = $page["langlinks"][0]["*"];
-			$i++;
+            if (array_key_exists("langlinks", $page)) {
+                $results[$i] = $page["langlinks"][0]["*"];
+                $i++;
+            }
 		}
 		return $results;
 	}
 	function /*String*/ getMultipleTranslations() {
-	global $page;
-	
-	$page["extract"] = substr($page["extract"], stripos($page["extract"], "<li>")+4);
-	$extract = split("<li>", $page["extract"]);
-	$pages = Array();
-	foreach ($page["links"] as $v) {
-		if (!stristr($v["title"], "Wikipedia:"))
-			$pages[] = str_ireplace(" ", "_", $v["title"]);
-	}
-	$translations = getTranslationsForPages($pages);
+        global $page;
+        
+        $page["extract"] = substr($page["extract"], stripos($page["extract"], "<li>")+4);
+        $extract = split("<li>", $page["extract"]);
+        $pages = Array();
+        foreach ($page["links"] as $v) {
+            if (!stristr($v["title"], "Wikipedia:"))
+                $pages[] = str_ireplace(" ", "_", $v["title"]);
+        }
+        $translations = getTranslationsForPages($pages);
 
-	$finalResults = Array();
-	$i = 0;
-	foreach ($page["links"] as $v) {
-		$uncertain = true;
-		foreach ($extract as $v2)
-			if (stristr($v2, $v["title"]) && !stripos($v2, $v["title"]))
-				$uncertain = false;
+        $finalResults = Array();
+        $i = 0;
+        foreach ($page["links"] as $v) {
+            $uncertain = true;
+            foreach ($extract as $v2)
+                if (stristr($v2, $v["title"]) && !stripos($v2, $v["title"]))
+                    $uncertain = false;
 
-		if ($translations[$i] != "")
-			$finalResults[] = ($uncertain ? "§" : "") . $translations[$i];
-		$i++;
-	}
-	
-	asort($finalResults);
-	return join(",", $finalResults);
-}
+            if (array_key_exists($i, $translations) && $translations[$i] != "")
+                $finalResults[] = ($uncertain ? "§" : "") . $translations[$i];
+            $i++;
+        }
+        
+        asort($finalResults);
+        return join(",", $finalResults);
+    }
 
 ?>
